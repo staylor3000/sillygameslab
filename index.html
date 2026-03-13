@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Silly Games Lab</title>
+  <meta name="description" content="An indie game studio making simple, joyful web games. No downloads. No logins. Just play." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F7F5F2;
+      --bg-card: #FFFFFF;
+      --text-primary: #1A1A18;
+      --text-secondary: #6B6860;
+      --text-muted: #A8A69F;
+      --accent: #2D2D2B;
+      --accent-warm: #C8A882;
+      --border: #E8E4DE;
+      --border-subtle: #F0EDE8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-weight: 300;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* — NAV — */
+    nav {
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-subtle);
+      animation: fadeDown 0.8s ease both;
+    }
+
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      letter-spacing: 0.02em;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover { color: var(--text-primary); }
+
+    /* — HERO — */
+    .hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 3rem 6rem;
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+      animation: fadeUp 1s ease 0.1s both;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-warm);
+      margin-bottom: 1.8rem;
+      font-weight: 500;
+    }
+
+    .hero-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+      margin-bottom: 2rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--text-secondary);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 480px;
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    /* — DIVIDER — */
+    .divider {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 3rem;
+      border: none;
+      border-top: 1px solid var(--border);
+      animation: fadeUp 1s ease 0.3s both;
+    }
+
+    /* — GAMES — */
+    .games-section {
+      padding: 5rem 3rem;
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+      animation: fadeUp 1s ease 0.4s both;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 2.5rem;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .game-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .game-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--accent-warm);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .game-card:hover {
+      border-color: var(--accent-warm);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+    }
+
+    .game-card:hover::after { transform: scaleX(1); }
+
+    .game-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-warm);
+      font-weight: 500;
+    }
+
+    .game-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.9rem;
+      line-height: 1.1;
+      color: var(--text-primary);
+    }
+
+    .game-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .game-cta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      font-weight: 500;
+      margin-top: 0.5rem;
+    }
+
+    .game-cta svg {
+      transition: transform 0.2s ease;
+    }
+
+    .game-card:hover .game-cta svg { transform: translateX(4px); }
+
+    .coming-soon {
+      opacity: 0.45;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .coming-soon .game-cta { color: var(--text-muted); }
+
+    /* — ABOUT — */
+    .about-section {
+      padding: 5rem 3rem 8rem;
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      align-items: start;
+      animation: fadeUp 1s ease 0.5s both;
+      border-top: 1px solid var(--border);
+    }
+
+    .about-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 500;
+      padding-top: 0.3rem;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.85;
+      font-weight: 300;
+    }
+
+    .about-text p + p { margin-top: 1.2rem; }
+
+    /* — FOOTER — */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+      animation: fadeUp 1s ease 0.6s both;
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .footer-email {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s ease;
+    }
+
+    .footer-email:hover { color: var(--text-primary); }
+
+    /* — ANIMATIONS — */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* — RESPONSIVE — */
+    @media (max-width: 640px) {
+      nav { padding: 1.5rem; }
+      .nav-links { display: none; }
+      .hero, .games-section, .about-section, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .about-section { grid-template-columns: 1fr; gap: 1.5rem; }
+      .hero { padding-top: 5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="/">Silly Games Lab</a>
+    <ul class="nav-links">
+      <li><a href="#games">Games</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="mailto:hello@sillygameslab.com">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <p class="hero-eyebrow">Indie Game Studio</p>
+      <h1 class="hero-title">Simple games,<br><em>serious fun.</em></h1>
+      <p class="hero-sub">We make casual web games you can pick up in seconds. No downloads, no logins — just play.</p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="games-section" id="games">
+      <p class="section-label">Our games</p>
+      <div class="games-grid">
+
+        <a class="game-card" href="https://playsnap.net" target="_blank" rel="noopener">
+          <span class="game-tag">Card Game · Live</span>
+          <h2 class="game-title">PlaySnap</h2>
+          <p class="game-desc">The classic snap card game, reimagined for the browser. Beat the CPU. Be quick.</p>
+          <span class="game-cta">
+            Play now
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 7H12M12 7L8 3M12 7L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </a>
+
+        <div class="game-card coming-soon">
+          <span class="game-tag">Coming soon</span>
+          <h2 class="game-title">Next up</h2>
+          <p class="game-desc">Something new is brewing in the lab. Watch this space.</p>
+          <span class="game-cta">Coming soon</span>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="about-section" id="about">
+      <p class="about-label">About</p>
+      <div class="about-text">
+        <p>Silly Games Lab is a one-person indie studio making small, joyful web games. The kind you can play on your lunch break, share with a friend, and actually finish.</p>
+        <p>Every game lives on its own corner of the internet — no app stores, no accounts, no friction. Just a link and a bit of fun.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span class="footer-copy">© 2026 Silly Games Lab</span>
+    <a class="footer-email" href="mailto:hello@sillygameslab.com">hello@sillygameslab.com</a>
+  </footer>
+
+</body>
+</html>
