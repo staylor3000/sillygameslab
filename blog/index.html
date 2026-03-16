@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dev Log — Silly Games Lab</title>
+  <meta name="description" content="Building browser games in the open with Claude and Claude Code. Short dev logs from a data engineer learning to make things." />
+  <link rel="canonical" href="https://sillygameslab.com/blog/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F7F5F2;
+      --bg-card: #FFFFFF;
+      --text-primary: #1A1A18;
+      --text-secondary: #6B6860;
+      --text-muted: #A8A69F;
+      --accent-warm: #C8A882;
+      --border: #E8E4DE;
+      --border-subtle: #F0EDE8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-weight: 300;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* — NAV — */
+    nav {
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      letter-spacing: 0.02em;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a.active { color: var(--text-primary); }
+
+    /* — MAIN — */
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 6rem 3rem 8rem;
+    }
+
+    /* — INTRO — */
+    .intro {
+      margin-bottom: 5rem;
+      animation: fadeUp 1s ease both;
+    }
+
+    .intro-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-warm);
+      margin-bottom: 1.8rem;
+      font-weight: 500;
+    }
+
+    .intro-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.8rem;
+    }
+
+    .intro-title em {
+      font-style: italic;
+      color: var(--text-secondary);
+    }
+
+    .intro-body {
+      max-width: 560px;
+    }
+
+    .intro-body p {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.85;
+      font-weight: 300;
+    }
+
+    .intro-body p + p { margin-top: 1rem; }
+
+    /* — GAME SECTIONS — */
+    .game-section {
+      border-top: 1px solid var(--border);
+      padding-top: 3rem;
+      margin-bottom: 3.5rem;
+      animation: fadeUp 1s ease 0.2s both;
+    }
+
+    .game-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1.8rem;
+    }
+
+    .game-section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.6rem;
+      color: var(--text-primary);
+    }
+
+    .game-section-link {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .game-section-link:hover { color: var(--text-primary); }
+
+    .post-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .post-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+      text-decoration: none;
+      color: inherit;
+      transition: color 0.2s ease;
+    }
+
+    .post-item:hover .post-title { color: var(--accent-warm); }
+
+    .post-title {
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      font-weight: 400;
+      transition: color 0.2s ease;
+    }
+
+    .post-date {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      margin-left: 2rem;
+    }
+
+    .empty-state {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* — FOOTER — */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .footer-home {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s ease;
+    }
+
+    .footer-home:hover { color: var(--text-primary); }
+
+    /* — ANIMATIONS — */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* — RESPONSIVE — */
+    @media (max-width: 640px) {
+      nav { padding: 1.5rem; }
+      .nav-links { display: none; }
+      main, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+      main { padding-top: 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="/">Silly Games Lab</a>
+    <ul class="nav-links">
+      <li><a href="/#games">Games</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/blog/" class="active">Dev Log</a></li>
+      <li><a href="mailto:hello@sillygameslab.com">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="intro">
+      <p class="intro-eyebrow">Building in the open</p>
+      <h1 class="intro-title">Dev Log — <em>making it up<br>as we go.</em></h1>
+      <div class="intro-body">
+        <p>These are short dev logs from building browser games with Claude and Claude Code. I'm a data engineer by trade, not a software developer — so this is very much a steep learning curve documented in public.</p>
+        <p>No long articles. Just honest bullet points about what got built, what broke, and what surprised me along the way.</p>
+      </div>
+    </div>
+
+    <div class="game-section">
+      <div class="game-section-header">
+        <h2 class="game-section-title">PlaySnap</h2>
+        <a class="game-section-link" href="/blog/playsnap/">All entries &rarr;</a>
+      </div>
+      <ul class="post-list">
+        <li><p class="empty-state">First entry coming soon.</p></li>
+      </ul>
+    </div>
+
+    <div class="game-section">
+      <div class="game-section-header">
+        <h2 class="game-section-title">Can You Click It?</h2>
+        <a class="game-section-link" href="/blog/canyouclickit/">All entries &rarr;</a>
+      </div>
+      <ul class="post-list">
+        <li><p class="empty-state">First entry coming soon.</p></li>
+      </ul>
+    </div>
+
+    <div class="game-section">
+      <div class="game-section-header">
+        <h2 class="game-section-title">Hangmango</h2>
+        <a class="game-section-link" href="/blog/hangmango/">All entries &rarr;</a>
+      </div>
+      <ul class="post-list">
+        <li><p class="empty-state">First entry coming soon.</p></li>
+      </ul>
+    </div>
+
+    <div class="game-section">
+      <div class="game-section-header">
+        <h2 class="game-section-title">Silly Games Lab</h2>
+        <a class="game-section-link" href="/blog/sillygameslab/">All entries &rarr;</a>
+      </div>
+      <ul class="post-list">
+        <li><p class="empty-state">First entry coming soon.</p></li>
+      </ul>
+    </div>
+
+  </main>
+
+  <footer>
+    <span class="footer-copy">&copy; 2026 Silly Games Lab</span>
+    <a class="footer-home" href="/">Back to home</a>
+  </footer>
+
+</body>
+</html>
