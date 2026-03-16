@@ -210,12 +210,12 @@
     </div>
 
     <div class="post-body">
-      <p class="post-intro">PlaySnap started as a Python prototype that never got played and ended up as a live browser game at <a href="https://playsnap.net" target="_blank" rel="noopener" style="color: inherit;">playsnap.net</a>. Here's how we got there.</p>
+      <p class="post-intro">PlaySnap started as a Python prototype and ended up as a live browser game at <a href="https://playsnap.net" target="_blank" rel="noopener" style="color: inherit;">playsnap.net</a>. Here's how we got there.</p>
 
       <ul class="post-bullets">
-        <li>The very first thing Claude did was bin the Python prototype entirely and rebuild it in HTML, CSS and JavaScript — which, honestly, was the right call. The web version could be shared with a link. The Python one could not.</li>
+        <li>The very first thing Claude did was bin the Python prototype entirely and rebuild it in HTML, CSS and JavaScript.</li>
         <li>Early builds had the two players' cards just sitting next to each other. It looked nothing like an actual game of snap. Getting the pile to behave — cards stacking on top of each other in the middle — took more back and forth than expected.</li>
-        <li>The CPU opponent was originally instant, which made the game unplayable. Dialling in a reaction delay that felt fair but beatable took a few iterations. Eventually it became the whole difficulty system — levels 1 to 10, with the CPU getting faster and sneakier as you progress.</li>
+        <li>The CPU opponent was a lot quicker to react, which made the game unplayable. Dialling in a reaction delay that felt fair but beatable took a few iterations. Eventually it became the whole difficulty system — levels 1 to 10 (down from an initial 1-100... might have been a little overkill), with the CPU getting faster and more accurate as you progress.</li>
         <li>There's a false snap penalty where the CPU wins the pile if you hit snap on a non-match. This came in early and really changed how the game felt — suddenly you couldn't just spam the button.</li>
         <li>Reaction time stats were added mid-way through. Seeing your best snap time in milliseconds turns out to be oddly motivating.</li>
         <li>At some point the pile started showing how many cards were in it, and a little stressed emoji face appeared next to it that gets progressively more panicked as the pile grows. That was not planned. It was suggested as a throwaway idea and Claude just built it. It's one of the best things in the game.</li>
@@ -223,7 +223,6 @@
         <li>A game-over modal with confetti on a win and a pulsing rematch button on a loss was way harder to get right than it sounds. The confetti alone took a couple of attempts to not be horrific.</li>
         <li>SEO work was an education. Adding structured data, a sitemap, robots.txt, canonical URLs — none of it is complicated but there's a lot of it and it's fiddly. Claude handled most of it, but you still have to know what to ask for.</li>
         <li>The game is now live with AdSense, a proper share flow, and a footer linking back to Silly Games Lab. From Python prototype to actual live thing in a few months of evening sessions.</li>
-        <li>What's next: the game is in a good place. Any future sessions will probably be polish and whatever breaks.</li>
       </ul>
     </div>
   </main>
