@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Can You Click It? — The Story So Far | Silly Games Lab Dev Log</title>
+  <meta name="description" content="How Can You Click It went from an idea to five live click speed and reaction tests. A dev log by Sam at Silly Games Lab." />
+  <link rel="canonical" href="https://sillygameslab.com/blog/canyouclickit/the-story-so-far.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #F7F5F2; --bg-card: #FFFFFF; --text-primary: #1A1A18;
+      --text-secondary: #6B6860; --text-muted: #A8A69F;
+      --accent-warm: #C8A882; --border: #E8E4DE; --border-subtle: #F0EDE8;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background-color: var(--bg); color: var(--text-primary); min-height: 100vh; display: flex; flex-direction: column; font-weight: 300; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    nav { padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); }
+    .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.15rem; letter-spacing: 0.02em; color: var(--text-primary); text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); text-decoration: none; transition: color 0.2s ease; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
+    main { flex: 1; max-width: 680px; margin: 0 auto; width: 100%; padding: 5rem 3rem 8rem; }
+    .back-link { display: inline-block; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; margin-bottom: 3rem; transition: color 0.2s ease; }
+    .back-link:hover { color: var(--text-primary); }
+    .post-meta { margin-bottom: 2.5rem; }
+    .post-game { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-warm); font-weight: 500; margin-bottom: 0.8rem; }
+    .post-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 0.8rem; }
+    .post-date { font-size: 0.78rem; color: var(--text-muted); letter-spacing: 0.04em; }
+    .post-body { border-top: 1px solid var(--border); padding-top: 2.5rem; }
+    .post-intro { font-size: 1rem; color: var(--text-secondary); line-height: 1.85; margin-bottom: 2rem; font-weight: 300; }
+    .post-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
+    .post-bullets li { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7; padding-left: 1.2rem; position: relative; }
+    .post-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--accent-warm); }
+    footer { border-top: 1px solid var(--border-subtle); padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; max-width: 900px; margin: 0 auto; width: 100%; }
+    .footer-copy { font-size: 0.78rem; color: var(--text-muted); letter-spacing: 0.04em; }
+    .footer-link { font-size: 0.78rem; color: var(--text-muted); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s ease; }
+    .footer-link:hover { color: var(--text-primary); }
+    @media (max-width: 640px) { nav { padding: 1.5rem; } .nav-links { display: none; } main, footer { padding-left: 1.5rem; padding-right: 1.5rem; } main { padding-top: 3rem; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="/">Silly Games Lab</a>
+    <ul class="nav-links">
+      <li><a href="/#games">Games</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/blog/" class="active">Dev Log</a></li>
+      <li><a href="mailto:hello@sillygameslab.com">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <a class="back-link" href="/blog/">&larr; Dev Log</a>
+
+    <div class="post-meta">
+      <p class="post-game">Can You Click It?</p>
+      <h1 class="post-title">The Story So Far</h1>
+      <p class="post-date">16 March 2026</p>
+    </div>
+
+    <div class="post-body">
+      <p class="post-intro">Can You Click It grew out of a simple question: how fast can you actually click? Turns out there are a lot of ways to answer that, and competitive Minecraft players have opinions about all of them.</p>
+
+      <ul class="post-bullets">
+        <li>The original idea was just a CPS test — clicks per second. You click a button as fast as you can for a few seconds, get a number, feel good or bad about yourself. Simple enough.</li>
+        <li>Doing a bit of research made it clear the target audience was competitive gamers, particularly Minecraft PvP players, who care obsessively about clicking speed. That shaped everything — the tone, the rank names, the tests themselves.</li>
+        <li>The rank tier system (Turtle, Snail, Average, Fast, Pro, God) was one of those things that took about 10 minutes to decide and made the whole thing feel like an actual product rather than a utility page.</li>
+        <li>A spacebar test got added almost immediately — it turns out hammering the spacebar is a core mechanic in Minecraft PvP (something called "jump spam") and people want to know how good they are at it. Who knew.</li>
+        <li>Reaction time ended up being one of the more interesting technical problems. A single attempt is too variable, so it averages five. There's also a note in the copy acknowledging that browser-based reaction tests are inherently a bit optimistic — real reaction time is probably 250–350ms but the test will show lower. Felt honest to include that.</li>
+        <li>Jitter clicking and butterfly clicking are genuinely obscure techniques that certain players swear by. Jitter clicking involves tensing your forearm to vibrate your finger. Butterfly clicking uses two fingers alternating rapidly. Both sound made up but are very real.</li>
+        <li>Getting a consistent visual style across five separate test pages was more work than expected. The shared CSS helped but there was still a lot of fiddly alignment to get right.</li>
+        <li>A personal stats dashboard came in later — it stores your last 10 scores per test in the browser and shows trends over time. Claude suggested the local storage approach (saving data in your own browser, no account needed) and it was the right call for a simple site like this.</li>
+        <li>The logo went through a few versions before landing on charcoal text with just the word "Click" highlighted in coral. Small thing but it made a big difference to how the brand read.</li>
+        <li>What's next: AdSense slot IDs still need updating with real values from the dashboard. Otherwise it's in good shape.</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <span class="footer-copy">&copy; 2026 Silly Games Lab</span>
+    <a class="footer-link" href="/blog/">Back to Dev Log</a>
+  </footer>
+
+</body>
+</html>

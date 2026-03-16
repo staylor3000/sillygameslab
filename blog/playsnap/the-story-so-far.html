@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlaySnap — The Story So Far | Silly Games Lab Dev Log</title>
+  <meta name="description" content="How PlaySnap went from a rough prototype to a live browser game with levels, difficulty scaling, and its own domain. A dev log by Sam at Silly Games Lab." />
+  <link rel="canonical" href="https://sillygameslab.com/blog/playsnap/the-story-so-far.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F7F5F2;
+      --bg-card: #FFFFFF;
+      --text-primary: #1A1A18;
+      --text-secondary: #6B6860;
+      --text-muted: #A8A69F;
+      --accent-warm: #C8A882;
+      --border: #E8E4DE;
+      --border-subtle: #F0EDE8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-weight: 300;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    nav {
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      letter-spacing: 0.02em;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
+
+    main {
+      flex: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 5rem 3rem 8rem;
+    }
+
+    .back-link {
+      display: inline-block;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-bottom: 3rem;
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover { color: var(--text-primary); }
+
+    .post-meta {
+      margin-bottom: 2.5rem;
+    }
+
+    .post-game {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-warm);
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+    }
+
+    .post-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.8rem;
+    }
+
+    .post-date {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .post-body {
+      border-top: 1px solid var(--border);
+      padding-top: 2.5rem;
+    }
+
+    .post-intro {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.85;
+      margin-bottom: 2rem;
+      font-weight: 300;
+    }
+
+    .post-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .post-bullets li {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .post-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--accent-warm);
+    }
+
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .footer-link {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link:hover { color: var(--text-primary); }
+
+    @media (max-width: 640px) {
+      nav { padding: 1.5rem; }
+      .nav-links { display: none; }
+      main, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+      main { padding-top: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="/">Silly Games Lab</a>
+    <ul class="nav-links">
+      <li><a href="/#games">Games</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/blog/" class="active">Dev Log</a></li>
+      <li><a href="mailto:hello@sillygameslab.com">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <a class="back-link" href="/blog/">&larr; Dev Log</a>
+
+    <div class="post-meta">
+      <p class="post-game">PlaySnap</p>
+      <h1 class="post-title">The Story So Far</h1>
+      <p class="post-date">16 March 2026</p>
+    </div>
+
+    <div class="post-body">
+      <p class="post-intro">PlaySnap started as a Python prototype that never got played and ended up as a live browser game at <a href="https://playsnap.net" target="_blank" rel="noopener" style="color: inherit;">playsnap.net</a>. Here's how we got there.</p>
+
+      <ul class="post-bullets">
+        <li>The very first thing Claude did was bin the Python prototype entirely and rebuild it in HTML, CSS and JavaScript — which, honestly, was the right call. The web version could be shared with a link. The Python one could not.</li>
+        <li>Early builds had the two players' cards just sitting next to each other. It looked nothing like an actual game of snap. Getting the pile to behave — cards stacking on top of each other in the middle — took more back and forth than expected.</li>
+        <li>The CPU opponent was originally instant, which made the game unplayable. Dialling in a reaction delay that felt fair but beatable took a few iterations. Eventually it became the whole difficulty system — levels 1 to 10, with the CPU getting faster and sneakier as you progress.</li>
+        <li>There's a false snap penalty where the CPU wins the pile if you hit snap on a non-match. This came in early and really changed how the game felt — suddenly you couldn't just spam the button.</li>
+        <li>Reaction time stats were added mid-way through. Seeing your best snap time in milliseconds turns out to be oddly motivating.</li>
+        <li>At some point the pile started showing how many cards were in it, and a little stressed emoji face appeared next to it that gets progressively more panicked as the pile grows. That was not planned. It was suggested as a throwaway idea and Claude just built it. It's one of the best things in the game.</li>
+        <li>The whole visual style got rebuilt in one session — new fonts (Fredoka One and Nunito), a cream/coral/mint/purple palette, CSS variables throughout. Went from "functional" to something that actually looked like a proper game.</li>
+        <li>A game-over modal with confetti on a win and a pulsing rematch button on a loss was way harder to get right than it sounds. The confetti alone took a couple of attempts to not be horrific.</li>
+        <li>SEO work was an education. Adding structured data, a sitemap, robots.txt, canonical URLs — none of it is complicated but there's a lot of it and it's fiddly. Claude handled most of it, but you still have to know what to ask for.</li>
+        <li>The game is now live with AdSense, a proper share flow, and a footer linking back to Silly Games Lab. From Python prototype to actual live thing in a few months of evening sessions.</li>
+        <li>What's next: the game is in a good place. Any future sessions will probably be polish and whatever breaks.</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <span class="footer-copy">&copy; 2026 Silly Games Lab</span>
+    <a class="footer-link" href="/blog/">Back to Dev Log</a>
+  </footer>
+
+</body>
+</html>
