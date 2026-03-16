@@ -39,6 +39,8 @@
     .footer-copy { font-size: 0.78rem; color: var(--text-muted); letter-spacing: 0.04em; }
     .footer-link { font-size: 0.78rem; color: var(--text-muted); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s ease; }
     .footer-link:hover { color: var(--text-primary); }
+    .play-button { display: inline-block; margin-bottom: 2.5rem; padding: 0.65rem 1.4rem; background: var(--text-primary); color: var(--bg); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: opacity 0.2s ease; }
+    .play-button:hover { opacity: 0.75; }
     @media (max-width: 640px) { nav { padding: 1.5rem; } .nav-links { display: none; } main, footer { padding-left: 1.5rem; padding-right: 1.5rem; } main { padding-top: 3rem; } }
   </style>
 </head>
@@ -63,18 +65,18 @@
       <p class="post-date">16 March 2026</p>
     </div>
 
+    <a class="play-button" href="https://sillygameslab.com" target="_blank" rel="noopener">Visit Silly Games Lab &rarr;</a>
+
     <div class="post-body">
-      <p class="post-intro">Silly Games Lab is the umbrella for all of this — a home page that lists the games, links them together, and gives the whole thing a name. Here's how it got built and why it exists.</p>
+      <p class="post-intro"><a href="https://sillygameslab.com" target="_blank" rel="noopener" style="color: inherit;">Silly Games Lab</a> is the umbrella for all of this — a home page that lists the games, links them together, and gives the whole thing a name. Here's how it got built and why it exists.</p>
 
       <ul class="post-bullets">
         <li>Before sillygameslab.com existed, each game just lived on its own domain with no connection to anything else. PlaySnap at playsnap.net, Can You Click It at canyouclickit.com. Fine individually, but nothing tying them together as a body of work.</li>
-        <li>The brief for the landing page was deliberately minimal — a list of games, a short about section, a footer. The design (warm cream background, serif headings, subtle hover cards) came together quickly and felt like a proper indie studio rather than a portfolio page.</li>
-        <li>The fonts are DM Serif Display for headings and DM Sans for body text. Different from the individual games, which each have their own palettes — but that's intentional. The hub should feel like a studio, not like any specific game.</li>
+        <li>The brief for the landing page was deliberately minimal — a list of games, a short about section, a footer. Left mostly to Claude to design.</li>
         <li>Adding a new game card is about 10 lines of HTML. That was a deliberate choice — keeping the structure simple so there's no friction when the next game is ready to list.</li>
         <li>SEO setup (sitemap, robots.txt, Google Search Console verification) was done early, which is the right order. Boring but worthwhile.</li>
         <li>This dev log is part of the same session that built the blog. The idea was to document the building process in public — partly for SEO, partly because I don't really have any clue what I'm doing so it'll be fun to document, and if that opens up the conversation for people then great.</li>
         <li>Claude Code handled the vast majority of the code across every project here. The workflow is: describe what you want, review what gets built, iterate. It's faster than learning to write the code from scratch but you still have to understand enough to know when something's wrong.</li>
-        <li>What's next: new games get added as they get built. The blog gets a new entry at the end of each working session.</li>
       </ul>
     </div>
   </main>

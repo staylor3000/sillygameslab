@@ -39,6 +39,8 @@
     .footer-copy { font-size: 0.78rem; color: var(--text-muted); letter-spacing: 0.04em; }
     .footer-link { font-size: 0.78rem; color: var(--text-muted); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s ease; }
     .footer-link:hover { color: var(--text-primary); }
+    .play-button { display: inline-block; margin-bottom: 2.5rem; padding: 0.65rem 1.4rem; background: var(--text-primary); color: var(--bg); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: opacity 0.2s ease; }
+    .play-button:hover { opacity: 0.75; }
     @media (max-width: 640px) { nav { padding: 1.5rem; } .nav-links { display: none; } main, footer { padding-left: 1.5rem; padding-right: 1.5rem; } main { padding-top: 3rem; } }
   </style>
 </head>
@@ -63,18 +65,19 @@
       <p class="post-date">16 March 2026</p>
     </div>
 
+    <a class="play-button" href="https://canyouclickit.com" target="_blank" rel="noopener">Play Can You Click It? &rarr;</a>
+
     <div class="post-body">
-      <p class="post-intro">Can You Click It? was born out of some research (via Claude) into simple websites with high volume organic traffic where the competition is stale. Turns out gamers these days really care about how fast they can click, and competitive Minecraft players have opinions about all the different ways of clicking.</p>
+      <p class="post-intro"><a href="https://canyouclickit.com" target="_blank" rel="noopener" style="color: inherit;">Can You Click It?</a> was born out of some research (via Claude) into simple websites with high volume organic traffic where the competition is stale. Turns out gamers these days really care about how fast they can click, and competitive Minecraft players have opinions about all the different ways of clicking.</p>
 
       <ul class="post-bullets">
         <li>The original idea was just a CPS test — clicks per second. You click a button as fast as you can for a few seconds, get a number, feel good or bad about yourself. Simple enough.</li>
         <li>Doing a bit of research made it clear the target audience was competitive gamers, particularly Minecraft PvP players, who care obsessively about clicking speed. That shaped everything — the tone, the rank names, the tests themselves.</li>
-        <li>The rank tier system (Turtle, Snail, Average, Fast, Pro, God) was one of those things that took about 10 minutes to decide and made the whole thing feel like an actual product rather than a utility page.</li>
+        <li>The rank tier system (Turtle, Snail, Average, Fast, Pro, God) took about 10 minutes to land on.</li>
         <li>A spacebar test got added almost immediately — it turns out hammering the spacebar is a core mechanic in Minecraft PvP (something called "jump spam") and people want to know how good they are at it. Who knew.</li>
         <li>Reaction time ended up being one of the more interesting technical problems. A single attempt is too variable, so it averages five. There's also a note in the copy acknowledging that browser-based reaction tests are inherently a bit optimistic — real reaction time is probably 250–350ms but the test will show lower. Felt honest to include that.</li>
         <li>Jitter clicking and butterfly clicking are genuinely obscure techniques that certain players swear by. Jitter clicking involves tensing your forearm to vibrate your finger. Butterfly clicking uses two fingers alternating rapidly. Both sound made up but are very real.</li>
-        <li>Getting a consistent visual style across five separate test pages was more work than expected. The shared CSS helped but there was still a lot of fiddly alignment to get right.</li>
-        <li>A personal stats dashboard came in later — it stores your last 10 scores per test in the browser and shows trends over time. Claude suggested the local storage approach (saving data in your own browser, no account needed) and it was the right call for a simple site like this.</li>
+        <li>A personal stats dashboard came in later — it stores your last 10 scores per test in the browser and shows trends over time. Claude suggested saving data locally in the browser rather than needing an account, which avoided building any kind of backend.</li>
       </ul>
     </div>
   </main>

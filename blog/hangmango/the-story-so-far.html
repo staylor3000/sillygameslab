@@ -39,6 +39,8 @@
     .footer-copy { font-size: 0.78rem; color: var(--text-muted); letter-spacing: 0.04em; }
     .footer-link { font-size: 0.78rem; color: var(--text-muted); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s ease; }
     .footer-link:hover { color: var(--text-primary); }
+    .play-button { display: inline-block; margin-bottom: 2.5rem; padding: 0.65rem 1.4rem; background: var(--text-primary); color: var(--bg); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: opacity 0.2s ease; }
+    .play-button:hover { opacity: 0.75; }
     @media (max-width: 640px) { nav { padding: 1.5rem; } .nav-links { display: none; } main, footer { padding-left: 1.5rem; padding-right: 1.5rem; } main { padding-top: 3rem; } }
   </style>
 </head>
@@ -63,13 +65,15 @@
       <p class="post-date">16 March 2026</p>
     </div>
 
+    <a class="play-button" href="https://hangmango.net" target="_blank" rel="noopener">Play hangmango &rarr;</a>
+
     <div class="post-body">
-      <p class="post-intro">Hangman is a classic but the stick figure dying is a bit grim. Replacing it with a mango falling out of a tree seemed to be the best way to crowbar "hangman" into a usable domain name for SEO purposes.</p>
+      <p class="post-intro">Hangman is a classic but the stick figure dying is a bit grim. Replacing it with a mango falling out of a tree seemed to be the best way to crowbar "hangman" into a usable domain name for SEO purposes. The result is <a href="https://hangmango.net" target="_blank" rel="noopener" style="color: inherit;">hangmango.net</a>.</p>
 
       <ul class="post-bullets">
         <li>The brief was simple: family-friendly hangman alternative with a fruit theme. The name "hangmango" arrived pretty quickly and everything else grew around it.</li>
-        <li>Six word categories (Animals, Food, Sports, Countries, Movies, Science) each with three difficulty levels gave it enough variety to be replayable without being overwhelming to build.</li>
-        <li>Custom word mode was a nice addition — you type in a word, hand the device to someone else, and they guess. Means you can play it with another person without needing any backend. Claude suggested the "pass the device" flow and it works well.</li>
+        <li>Six word categories (Animals, Food, Sports, Countries, Movies, Science) each with three difficulty levels.</li>
+        <li>There's a custom word mode — you type in a word, hand the device to someone else, and they guess. Means you can play it with another person without needing any backend.</li>
         <li>The CSS tree animation was (apparently) the most ambitious bit technically and fully left up to Claude and it needs a hell of a lot of work. A mango sits in a green canopy; each wrong guess makes the tree wobble with increasing intensity, and on the sixth wrong guess the mango falls and splats. None of this is strictly necessary but it's a nod to the original version of hangman. Claude wrote the whole animation in one go and it mostly worked first time but it's not exactly Pixar.</li>
       </ul>
     </div>

@@ -180,6 +180,23 @@
 
     .footer-link:hover { color: var(--text-primary); }
 
+    .play-button {
+      display: inline-block;
+      margin-bottom: 2.5rem;
+      padding: 0.65rem 1.4rem;
+      background: var(--text-primary);
+      color: var(--bg);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: opacity 0.2s ease;
+    }
+
+    .play-button:hover { opacity: 0.75; }
+
     @media (max-width: 640px) {
       nav { padding: 1.5rem; }
       .nav-links { display: none; }
@@ -209,6 +226,8 @@
       <p class="post-date">16 March 2026</p>
     </div>
 
+    <a class="play-button" href="https://playsnap.net" target="_blank" rel="noopener">Play PlaySnap &rarr;</a>
+
     <div class="post-body">
       <p class="post-intro">PlaySnap started as a Python prototype and ended up as a live browser game at <a href="https://playsnap.net" target="_blank" rel="noopener" style="color: inherit;">playsnap.net</a>. Here's how we got there.</p>
 
@@ -218,8 +237,7 @@
         <li>The CPU opponent was a lot quicker to react, which made the game unplayable. Dialling in a reaction delay that felt fair but beatable took a few iterations. Eventually it became the whole difficulty system — levels 1 to 10 (down from an initial 1-100... might have been a little overkill), with the CPU getting faster and more accurate as you progress.</li>
         <li>There's a false snap penalty where the CPU wins the pile if you hit snap on a non-match. This came in early and really changed how the game felt — suddenly you couldn't just spam the button.</li>
         <li>Reaction time stats were added mid-way through. Seeing your best snap time in milliseconds turns out to be oddly motivating.</li>
-        <li>At some point the pile started showing how many cards were in it, and a little stressed emoji face appeared next to it that gets progressively more panicked as the pile grows. That was not planned. It was suggested as a throwaway idea and Claude just built it. It's one of the best things in the game.</li>
-        <li>The whole visual style got rebuilt in one session — new fonts (Fredoka One and Nunito), a cream/coral/mint/purple palette, CSS variables throughout. Went from "functional" to something that actually looked like a proper game.</li>
+        <li>At some point the pile started showing how many cards were in it, and a little stressed emoji face appeared next to it that gets progressively more panicked as the pile grows. That was not planned. It was suggested as a throwaway idea and Claude just built it.</li>
         <li>A game-over modal with confetti on a win and a pulsing rematch button on a loss was way harder to get right than it sounds. The confetti alone took a couple of attempts to not be horrific.</li>
         <li>SEO work was an education. Adding structured data, a sitemap, robots.txt, canonical URLs — none of it is complicated but there's a lot of it and it's fiddly. Claude handled most of it, but you still have to know what to ask for.</li>
         <li>The game is now live with AdSense, a proper share flow, and a footer linking back to Silly Games Lab. From Python prototype to actual live thing in a few months of evening sessions.</li>
