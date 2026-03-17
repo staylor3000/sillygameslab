@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>hangmango — The Artwork Update | Silly Games Lab Dev Log</title>
+  <meta name="description" content="Custom panel artwork replaces the CSS animation in hangmango, plus a timer, a redesigned result modal, and a sitemap fix. A dev log by Sam at Silly Games Lab." />
+  <link rel="canonical" href="https://sillygameslab.com/blog/hangmango/the-artwork-update.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #F7F5F2; --bg-card: #FFFFFF; --text-primary: #1A1A18;
+      --text-secondary: #6B6860; --text-muted: #A8A69F;
+      --accent-warm: #C8A882; --border: #E8E4DE; --border-subtle: #F0EDE8;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background-color: var(--bg); color: var(--text-primary); min-height: 100vh; display: flex; flex-direction: column; font-weight: 300; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    nav { padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); }
+    .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.15rem; letter-spacing: 0.02em; color: var(--text-primary); text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); text-decoration: none; transition: color 0.2s ease; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
+    main { flex: 1; max-width: 680px; margin: 0 auto; width: 100%; padding: 5rem 3rem 8rem; }
+    .back-link { display: inline-block; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; margin-bottom: 3rem; transition: color 0.2s ease; }
+    .back-link:hover { color: var(--text-primary); }
+    .post-meta { margin-bottom: 2.5rem; }
+    .post-game { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-warm); font-weight: 500; margin-bottom: 0.8rem; }
+    .post-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 0.8rem; }
+    .post-date { font-size: 0.78rem; color: var(--text-muted); letter-spacing: 0.04em; }
+    .post-body { border-top: 1px solid var(--border); padding-top: 2.5rem; }
+    .post-intro { font-size: 1rem; color: var(--text-secondary); line-height: 1.85; margin-bottom: 2rem; font-weight: 300; }
+    .post-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
+    .post-bullets li { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7; padding-left: 1.2rem; position: relative; }
+    .post-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--accent-warm); }
+    footer { border-top: 1px solid var(--border-subtle); padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; max-width: 900px; margin: 0 auto; width: 100%; }
+    .footer-copy { font-size: 0.78rem; color: var(--text-muted); letter-spacing: 0.04em; }
+    .footer-link { font-size: 0.78rem; color: var(--text-muted); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s ease; }
+    .footer-link:hover { color: var(--text-primary); }
+    .play-button { display: inline-block; margin-bottom: 2.5rem; padding: 0.65rem 1.4rem; background: var(--text-primary); color: var(--bg); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: opacity 0.2s ease; }
+    .play-button:hover { opacity: 0.75; }
+    @media (max-width: 640px) { nav { padding: 1.5rem; } .nav-links { display: none; } main, footer { padding-left: 1.5rem; padding-right: 1.5rem; } main { padding-top: 3rem; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="/">Silly Games Lab</a>
+    <ul class="nav-links">
+      <li><a href="/#games">Games</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/blog/" class="active">Dev Log</a></li>
+      <li><a href="mailto:hello@sillygameslab.com">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <a class="back-link" href="/blog/">&larr; Dev Log</a>
+
+    <div class="post-meta">
+      <p class="post-game">hangmango</p>
+      <h1 class="post-title">The Artwork Update</h1>
+      <p class="post-date">17 March 2026</p>
+    </div>
+
+    <a class="play-button" href="https://hangmango.net" target="_blank" rel="noopener">Play hangmango &rarr;</a>
+
+    <div class="post-body">
+      <p class="post-intro">The CSS animation that launched with <a href="https://hangmango.net" target="_blank" rel="noopener" style="color: inherit;">hangmango</a> was always a placeholder. Today the custom panel artwork went in, and a few other things got updated around it.</p>
+
+      <ul class="post-bullets">
+        <li>Eight custom panel images replaced the CSS animation — one per wrong guess state, plus a win panel. Bringing in actual artwork meant the whole layout had to change to accommodate them.</li>
+        <li>A counting-up timer was added. It starts on your first guess and stops when the game ends. Adds a bit of "how fast was that?" without any pressure.</li>
+        <li>The result modal now shows the word, wrong guess count, and time — so you have something to compare against next time. There's also a share button; it uses the browser's native share sheet on mobile and falls back to clipboard copy on desktop.</li>
+        <li>Also snuck in a sitemap fix — privacy.html was live but missing from sitemap.xml, which matters for AdSense review. Two-line change, worth doing.</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <span class="footer-copy">&copy; 2026 Silly Games Lab</span>
+    <a class="footer-link" href="/blog/">Back to Dev Log</a>
+  </footer>
+
+</body>
+</html>
